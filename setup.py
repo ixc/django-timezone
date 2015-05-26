@@ -13,6 +13,7 @@ setuptools.setup(
         'mkdocs',
         'nose-progressive',
         'pytz',
+        'six',
         'tox',
         'WebTest',
     ],

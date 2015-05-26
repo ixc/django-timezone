@@ -1,6 +1,7 @@
 import calendar
 import datetime as _datetime
 import pytz
+import six
 
 from django.conf import settings
 from django.utils.timezone import (
@@ -36,7 +37,7 @@ def get(tz=None):
     The ``tz`` argument can be a ``tzinfo`` object or a string. For example,
     "Australia/Sydney".
     """
-    if isinstance(tz, basestring):
+    if isinstance(tz, six.string_types):
         tz = pytz.timezone(tz)
     return tz or get_current_timezone()
 
