@@ -8,7 +8,6 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         'coverage',
-        'django-dynamic-fixture',
         'django-nose',
         'django-webtest',
         'mkdocs',
@@ -18,6 +17,5 @@ setuptools.setup(
     ],
     extras_require={
         'dev': ['ipdb', 'ipython'],
-        'postgres': ['psycopg2'],
     },
 )
