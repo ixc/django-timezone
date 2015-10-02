@@ -4,6 +4,7 @@ import pytz
 import six
 
 from django.conf import settings
+from django.utils.encoding import force_str
 from django.utils.timezone import (
     get_current_timezone, is_aware, localtime, make_aware, make_naive,
     now as _now)
@@ -86,6 +87,39 @@ def now(tz=None):
     as a string. For example, "Australia/Sydney".
     """
     return localize(tz=None)
+
+
+def parse(when, tz=None):
+    """
+    Return an aware or naive ``datetime``, ``date``, or ``time`` object for
+    ``when``, which should be a string in one of ``DATETIME_INPUT_FORMATS``,
+    ``DATE_INPUT_FORMATS``, or ``TIME_INPUT_FORMATS``.
+    """
+    when = force_str(when)
+
+    # Datetime.
+    for format in settings.DATETIME_INPUT_FORMATS:
+        try:
+            return make_aware(
+                _datetime.datetime.strptime(when, format),
+                get_current_timezone(),
+            )
+        except (ValueError, TypeError):
+            continue
+
+    # Date.
+    for format in settings.DATE_INPUT_FORMATS:
+        try:
+            return _datetime.datetime.strptime(when, format).date()
+        except (ValueError, TypeError):
+            continue
+
+    # Time.
+    for format in settings.TIME_INPUT_FORMATS:
+        try:
+            return _datetime.datetime.strptime(when, format).time()
+        except (ValueError, TypeError):
+            continue
 
 
 def time(when=None, tz=None):
