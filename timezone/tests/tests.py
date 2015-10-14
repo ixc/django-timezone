@@ -36,5 +36,13 @@ class Timezone(WebTest):
     def test_now(self):
         self.assertTrue(timezone.now())
 
+    def test_strftime(self):
+        # Localize to UTC before formatting.
+        when = timezone.datetime(1999, 12, 31, 0, 1, tzinfo='Australia/Sydney')
+        self.assertEqual(
+            timezone.strftime(when, '%B %d, %Y at %H:%I', tz='UTC'),
+            'December 30, 1999 at 13:01',
+        )
+
     def test_time(self):
         self.assertTrue(timezone.time())

@@ -122,6 +122,14 @@ def parse(when, tz=None):
             continue
 
 
+def strftime(when, *args, **kwargs):
+    """
+    Localize ``when`` to ``tz`` and then pass ``*args`` and ``**kwargs`` to
+    ``strftime()``.
+    """
+    return localize(when, kwargs.pop('tz', None)).strftime(*args, **kwargs)
+
+
 def time(when=None, tz=None):
     """
     Return a naive ``time`` object for ``when`` in ``tz``. Shortcut for
