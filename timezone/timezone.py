@@ -121,6 +121,8 @@ def parse(when, tz=None):
         except (ValueError, TypeError):
             continue
 
+    raise ValueError('Unable to parse %r with any known format.' % when)
+
 
 def strftime(when, *args, **kwargs):
     """
