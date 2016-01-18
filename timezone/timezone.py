@@ -55,11 +55,14 @@ def jstime(when=None):
 def localize(when=None, tz=None):
     """
     Return ``when``, localized (if aware) or converted (if naive) to ``tz``.
-    The default for ``when`` is now. The default for ``tz`` is the current
+    The default for ``when`` is now. If ``when`` is a ``date``, it will be
+    converted to ``datetime`` first. The default for ``tz`` is the current
     timezone. The ``tz`` argument can also be given as a string. For example,
     "Australia/Sydney".
     """
     when = when or _now()
+    if not isinstance(when, _datetime.datetime):
+        when = datetime(*when.timetuple()[:3])
     if is_aware(when):
         when = localtime(when, get(tz))
     else:
