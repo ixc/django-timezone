@@ -3,8 +3,6 @@ from __future__ import print_function
 import setuptools
 import sys
 
-version = '0.1.dev0'
-
 # Convert README.md to reStructuredText.
 if {'bdist_wheel', 'sdist'}.intersection(sys.argv):
     try:
@@ -20,7 +18,7 @@ if {'bdist_wheel', 'sdist'}.intersection(sys.argv):
 
 setuptools.setup(
     name='django-timezone',
-    version=version,
+    use_scm_version={'version_scheme': 'post-release'},
     author='Interaction Consortium',
     author_email='studio@interaction.net.au',
     url='https://github.com/ixc/django-timezone',
@@ -44,4 +42,5 @@ setuptools.setup(
     extras_require={
         'dev': ['ipdb', 'ipython'],
     },
+    setup_requires=['setuptools_scm'],
 )
