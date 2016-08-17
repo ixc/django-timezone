@@ -29,18 +29,23 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     install_requires=[
-        'coverage',
-        'django-nose',
-        'django-webtest',
-        'mkdocs',
-        'nose-progressive',
         'pytz',
         'six',
-        'tox',
-        'WebTest',
     ],
     extras_require={
-        'dev': ['ipdb', 'ipython'],
+        'dev': [
+            'ipdb',
+            'ipython',
+            'mkdocs',
+        ],
+        'test': [
+            'coverage',
+            'django-nose',
+            'django-webtest',
+            'nose-progressive',
+            'tox',
+            'WebTest',
+        ],
     },
     setup_requires=['setuptools_scm'],
 )
